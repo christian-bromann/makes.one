@@ -1,0 +1,30 @@
+@import "compass/css3";
+
+@include font-face("SuisseIntl-Bold", font-files("SuisseIntl-Bold.otf"));
+@include font-face("SuisseIntl-Thin", font-files("SuisseIntl-Thin.otf"));
+
+// components
+@import "normalize";
+@import "variables";
+
+// modules
+@import "header";
+@import "footer";
+
+html, body {
+  font-family: $thin;
+  font-size: 12px;
+}
+
+.wrapper {
+  width: 910px;
+  margin: 0 auto;
+}
+
+.item {
+  margin: 5px;
+
+  img {
+    display: block;
+  }
+}

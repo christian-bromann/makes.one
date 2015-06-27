@@ -1,0 +1,16 @@
+footer {
+    text-align: center;
+    position: relative;
+    font-family: $bold;
+    margin-top: 30px;
+
+    .disclaimer {
+      position: absolute;
+      right: 5px;
+    }
+
+    a {
+      color: $black;
+      text-decoration: none;
+    }
+}
