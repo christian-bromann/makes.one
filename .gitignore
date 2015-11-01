@@ -30,4 +30,5 @@ node_modules
 .DS_Store
 .sass-cache
 style.css
+build.js
 js/components
