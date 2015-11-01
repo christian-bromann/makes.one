@@ -1,15 +1,9 @@
-    <footer role="contentinfo">
-        <a href="#!/imprint">Imprint</a>
-        <span class="disclaimer">&copy; <?php echo date("Y") ?> Philipp Lange</span>
-    </footer>
-
-</div>
 <?php wp_footer(); ?>
 
 <script src="<?php bloginfo('template_url'); ?>/js/components/jquery/dist/jquery.min.js"></script>
 <script src="<?php bloginfo('template_url'); ?>/js/components/imagesloaded/imagesloaded.pkgd.min.js"></script>
 <script src="<?php bloginfo('template_url'); ?>/js/components/masonry/dist/masonry.pkgd.min.js"></script>
-<script src="<?php bloginfo('template_url'); ?>/js/scripts.js"></script>
+<script src="<?php bloginfo('template_url'); ?>/js/build.js"></script>
 
 <!-- analytics -->
 <script>

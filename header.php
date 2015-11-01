@@ -16,11 +16,3 @@
 <link rel="stylesheet" href="<?=__ROOT__ ?>/css/style.css">
 
 <body <?php body_class(); ?>>
-
-<div class="wrapper">
-    <header role="banner">
-        <ul>
-            <?php echo loadNavigation(); ?>
-            <li><a href="#!contact">contact</a></li>
-        </ul>
-    </header>
