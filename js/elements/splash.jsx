@@ -2,19 +2,22 @@ import React from 'react'
 import classnames from 'classnames'
 
 class SplashScreen extends React.Component {
+    get displayName () {
+        return 'SplashScreen'
+    }
+
     constructor (props) {
         super(props)
         this.state = { loaded: false }
     }
 
-    render () {
-        let classes = classnames({loaded: this.state.loaded})
-        return <div id="splashscreen" className={classes}></div>
+    componentDidMount () {
+        setTimeout(() => this.setState({loaded: true}), 1000)
     }
 
-    componentDidMount () {
-        console.log('uhuhu')
-        setTimeout(() => this.setState({loaded: true}), 1000)
+    render () {
+        let classes = classnames({loaded: this.state.loaded})
+        return <div className={classes} id="splashscreen"></div>
     }
 }
 
