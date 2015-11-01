@@ -1,0 +1,29 @@
+#splashscreen {
+    width: 100%;
+    height: 100%;
+    background: $black;
+    @include transition(1s transform ease);
+    @include transform(translateY(0%));
+
+    &:after {
+        content: "";
+        display: block;
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin: -15px 0 0 -15px;
+        background: url("/img/cross.png") no-repeat;
+        @include animation(rotateAnimation 1.2s infinite ease)
+    }
+
+    &.loaded {
+        @include transform(translateY(-100%));
+    }
+}
+
+@include keyframes(rotateAnimation) {
+    0 { @include transform(rotate(0deg)); }
+    100% { @include transform(rotate(360deg)); }
+}

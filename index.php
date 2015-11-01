@@ -17,6 +17,8 @@ get_header();
 
 ?>
 
+<div id="app"></div>
+
 <section>
     <div class="imageWall">
         <?php $imageWall->render() ?>
