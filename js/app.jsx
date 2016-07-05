@@ -1,6 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import SplashScreen from './elements/splash.jsx'
+
+/**
+ * elements
+ */
+// import SplashScreen from './elements/splash.jsx'
+import ImageWall from './elements/image_wall.jsx'
 
 class App extends React.Component {
     get displayName () {
@@ -8,7 +13,7 @@ class App extends React.Component {
     }
 
     render () {
-        return <SplashScreen />
+        return <ImageWall />
     }
 }
 

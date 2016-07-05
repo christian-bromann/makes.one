@@ -12,7 +12,7 @@ class SplashScreen extends React.Component {
     }
 
     componentDidMount () {
-        setTimeout(() => this.setState({loaded: true}), 5000)
+        setTimeout(() => this.setState({loaded: true}), 0)
     }
 
     render () {
