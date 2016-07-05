@@ -8,16 +8,16 @@ class SplashScreen extends React.Component {
 
     constructor (props) {
         super(props)
-        this.state = { loaded: false }
+        this.state = { loaded: false, ready: false }
     }
 
     componentDidMount () {
-        setTimeout(() => this.setState({loaded: true}), 1000)
+        setTimeout(() => this.setState({loaded: true}), 5000)
     }
 
     render () {
-        let classes = classnames({loaded: this.state.loaded})
-        return <div className={classes} id="splashscreen"></div>
+        let classes = classnames({loaded: this.state.loaded, ready: this.state.ready})
+        return (<div className={classes} id="splashscreen"></div>)
     }
 }
 
