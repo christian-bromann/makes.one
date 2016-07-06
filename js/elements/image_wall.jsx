@@ -1,5 +1,14 @@
+/* global fetch */
+
 import React from 'react'
+import Masonry from 'react-masonry-component'
 import 'whatwg-fetch'
+
+const MASONRY_OPTIONS = {
+    transitionDuration: 200,
+    gutter: 10,
+    itemSelector: 'article.item'
+}
 
 class ImageWall extends React.Component {
     get displayName () {
@@ -12,12 +21,11 @@ class ImageWall extends React.Component {
         this.state = { posts: [] }
     }
 
-    componentDidMount () {
-        this.serverRequest = fetch(this.url)
+    componentWillMount () {
+        fetch(this.url)
             .then(this.checkStatus)
             .then(this.parseJSON)
             .then((res) => {
-                console.log(res)
                 this.setState({
                     posts: res
                 })
@@ -39,17 +47,24 @@ class ImageWall extends React.Component {
     }
 
     render () {
-        console.log(1, this.state)
+        const childElements = this.state.posts.map((post) => (
+            <article className="item" key={post.ID}>
+                <a href={`#!/${post.slug}`}>
+                    <img alt={post.title} src={post.featured_image.source} title={post.title}></img>
+                </a>
+            </article>
+        ))
+
         return (
-            <section className="imageWall">
-                {this.state.posts.map((post) => (
-                    <article className="item" key={post.ID}>
-                        <a href={`#!/${post.slug}`}>
-                            <img alt={post.title} src={post.featured_image.source} title={post.title}></img>
-                        </a>
-                    </article>)
-                )}
-            </section>)
+            <Masonry
+                className={'imageWall'}
+                disableImagesLoaded={false}
+                elementType={'section'}
+                options={MASONRY_OPTIONS}
+                updateOnEachImageLoad={false}
+            >
+                {childElements}
+            </Masonry>)
     }
 }
 

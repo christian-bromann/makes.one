@@ -7,34 +7,24 @@
 @import "normalize";
 @import "variables";
 
+html, body {
+  font-family: $thin;
+  font-size: 12px;
+  width: 100%;
+  height: 100%;
+}
+
+#app {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
 // elements
 @import "splashscreen";
+@import "imagewall";
 
 // modules
 @import "header";
 @import "footer";
-
-html, body {
-    font-family: $thin;
-    font-size: 12px;
-    width: 100%;
-    height: 100%;
-}
-
-#app {
-    width: 100%;
-    height: 100%;
-}
-
-.wrapper {
-  width: 910px;
-  margin: 0 auto;
-}
-
-.item {
-  margin: 5px;
-
-  img {
-    display: block;
-  }
-}
