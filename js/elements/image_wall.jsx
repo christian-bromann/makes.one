@@ -5,8 +5,8 @@ import Masonry from 'react-masonry-component'
 import 'whatwg-fetch'
 
 const MASONRY_OPTIONS = {
-    transitionDuration: 200,
-    gutter: 10,
+    isAnimated: true,
+    columnWidth: 1,
     itemSelector: 'article.item'
 }
 
