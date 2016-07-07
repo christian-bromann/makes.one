@@ -210,7 +210,7 @@ export default class Zoom {
                 // Wait with engaging panning as it may conflict with the
                 // zoom transition
                 this.panEngageTimeout = setTimeout(() => {
-                    this.panUpdateInterval = setInterval(this._pan, 1000 / 60)
+                    this.panUpdateInterval = setInterval(this._pan.bind(this), 1000 / 60)
                 }, 800)
             }
         }

@@ -4,6 +4,8 @@ import React from 'react'
 import Masonry from 'react-masonry-component'
 import 'whatwg-fetch'
 
+import Zoom from '../lib/zoom'
+
 const MASONRY_OPTIONS = {
     isAnimated: true,
     columnWidth: 1,
@@ -19,6 +21,7 @@ class ImageWall extends React.Component {
         super(props)
         this.url = '/wp-json/posts'
         this.state = { posts: [] }
+        this.zoom = new Zoom()
     }
 
     componentWillMount () {
@@ -46,9 +49,13 @@ class ImageWall extends React.Component {
         return response.json()
     }
 
+    toggleZoom (e) {
+        this.zoom.to({ element: e.target })
+    }
+
     render () {
         const childElements = this.state.posts.map((post) => (
-            <article className="item" key={post.ID}>
+            <article className="item" key={post.ID} onClick={this.toggleZoom.bind(this)}>
                 <a href={`#!/${post.slug}`}>
                     <img alt={post.title} src={post.featured_image.source} title={post.title}></img>
                 </a>
