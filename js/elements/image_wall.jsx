@@ -20,7 +20,7 @@ class ImageWall extends React.Component {
     constructor (props) {
         super(props)
         this.url = '/wp-json/posts'
-        this.state = { posts: [] }
+        this.state = { posts: [], activePost: null }
     }
 
     componentWillMount () {
@@ -48,10 +48,22 @@ class ImageWall extends React.Component {
         return response.json()
     }
 
+    setActivePost (id) {
+        this.setState({ activePost: id })
+    }
+
     render () {
-        const childElements = this.state.posts.map((post) => (
-            <Slideshow key={post.ID} post={post} />
-        ))
+        const childElements = this.state.posts.map((post) => {
+            return (
+                <Slideshow
+                    isActive={this.state.activePost === post.ID}
+                    isVisible={this.state.activePost === null}
+                    key={post.ID}
+                    post={post}
+                    setActivePost={this.setActivePost.bind(this)}
+                />
+            )
+        })
 
         return (
             <Masonry

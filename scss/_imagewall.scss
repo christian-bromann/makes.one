@@ -4,14 +4,24 @@
   margin: 50px auto 0;
 
   .item {
+    @include transition(1s opacity ease);
     margin: 10px;
     max-width: 100%;
     display: block;
     float: left;
+    opacity: 0;
+
+    &.visible {
+      opacity: 1;
+    }
 
     img {
       width: 100%;
       display: block;
     }
+  }
+
+  .item.active + .item {
+    display: none;
   }
 }

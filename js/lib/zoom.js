@@ -214,6 +214,10 @@ export default class Zoom {
                 }, 800)
             }
         }
+
+        return new Promise((r) => {
+            this.resolve = r
+        })
     }
 
     /**
@@ -224,6 +228,11 @@ export default class Zoom {
         clearInterval(this.panUpdateInterval)
         this._magnify({ x: 0, y: 0 }, 1)
         this.level = 1
+
+        if (typeof this.resolve === 'function') {
+            this.resolve()
+            return Promise.resolve()
+        }
     }
 
     get zoomLevel () {
