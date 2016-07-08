@@ -47,16 +47,6 @@ export default class Zoom {
                 this.out()
             }
         })
-
-        /**
-         * Monitor mouse movement for panning
-         */
-        document.addEventListener('mousemove', (event) => {
-            if (this.level !== 1) {
-                this.mouseX = event.clientX
-                this.mouseY = event.clientY
-            }
-        })
     }
 
     /**
