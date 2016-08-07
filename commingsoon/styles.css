@@ -1,0 +1,51 @@
+@font-face {
+  font-family: "SuisseIntl-Bold";
+  src: url('/fonts/SuisseIntl-Bold.otf') format('opentype');
+}
+@font-face {
+  font-family: "SuisseIntl-Thin";
+  src: url('/fonts/SuisseIntl-Thin.otf') format('opentype');
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: "SuisseIntl-Thin", sans;
+    font-size: 11px;
+    background-color: #000;
+    color: #fff;
+    width: 245px;
+}
+
+body {
+    margin: 85px 140px;
+}
+
+a {
+    font-family: "SuisseIntl-Bold", sans;
+    color: #4b4b4b;
+    text-decoration: none;
+    outline: 0;
+}
+
+header, section {
+    width: 100%;
+}
+
+header img {
+    margin: 0 auto 15px;
+    display: block;
+}
+
+@media only screen and (max-width: 500px) {
+    html {
+        width: 100%;
+    }
+    body {
+        margin: 85px auto 0;
+        width: 245px;
+    }
+    section, footer {
+        margin: 0 auto;
+    }
+}
