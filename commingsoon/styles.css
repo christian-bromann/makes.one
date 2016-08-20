@@ -22,10 +22,13 @@ body {
 }
 
 a {
-    font-family: "SuisseIntl-Bold", sans;
-    color: #4b4b4b;
+    font-family: "SuisseIntl-Thin", sans;
+    color: #616161;
     text-decoration: none;
     outline: 0;
+}
+a:hover {
+    color: #fff;
 }
 
 header, section {
