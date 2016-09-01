@@ -20,7 +20,7 @@ class ImageWall extends React.Component {
 
     constructor (props) {
         super(props)
-        this.url = '/wp-json/posts'
+        this.url = '/wp-json/wp/v2/posts?_embed=featured_media'
         this.state = { posts: [], activePost: null }
     }
 
@@ -38,9 +38,9 @@ class ImageWall extends React.Component {
         const childElements = this.state.posts.map((post) => {
             return (
                 <Slideshow
-                    isActive={this.state.activePost === post.ID}
+                    isActive={this.state.activePost === post.id}
                     isVisible={this.state.activePost === null}
-                    key={post.ID}
+                    key={post.id}
                     post={post}
                     setActivePost={this.setActivePost.bind(this)}
                 />

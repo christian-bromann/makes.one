@@ -23,7 +23,7 @@ class Slideshow extends React.Component {
     }
 
     toggleZoom (e) {
-        this.props.setActivePost(this.props.post.ID)
+        this.props.setActivePost(this.props.post.id)
         this.zoom.to({ element: e.target }).then(() => {
             this.props.setActivePost(null)
         })
@@ -40,9 +40,9 @@ class Slideshow extends React.Component {
         let classes = classnames({visible: this.props.isVisible || this.props.isActive}, 'item')
 
         return (
-            <article className={classes} key={this.props.post.ID} onClick={this.toggleZoom.bind(this)}>
+            <article className={classes} key={this.props.post.id} onClick={this.toggleZoom.bind(this)}>
                 <a href={`#!/${this.props.post.slug}`}>
-                    <img alt={this.props.post.title} src={this.props.post.featured_image.source} title={this.props.post.title}></img>
+                    <img alt={this.props.post.title} src={this.props.post._embedded['wp:featuredmedia'][0].source_url} title={this.props.post.title}></img>
                 </a>
             </article>
         )
