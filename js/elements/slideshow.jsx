@@ -27,6 +27,13 @@ class Slideshow extends React.Component {
         this.zoom.to({ element: e.target }).then(() => {
             this.props.setActivePost(null)
         })
+
+        /**
+         * fetch post data when user zooms in
+         */
+        if (!this.props.isActive) {
+            return
+        }
     }
 
     render () {

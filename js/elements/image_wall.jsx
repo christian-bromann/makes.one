@@ -5,6 +5,7 @@ import Masonry from 'react-masonry-component'
 import 'whatwg-fetch'
 
 import Slideshow from './slideshow.jsx'
+import { checkStatus, parseJSON } from '../utils/request'
 
 const MASONRY_OPTIONS = {
     isAnimated: true,
@@ -24,28 +25,9 @@ class ImageWall extends React.Component {
     }
 
     componentWillMount () {
-        fetch(this.url)
-            .then(this.checkStatus)
-            .then(this.parseJSON)
-            .then((res) => {
-                this.setState({
-                    posts: res
-                })
-            })
-    }
-
-    checkStatus (response) {
-        if (response.status >= 200 && response.status < 300) {
-            return response
-        }
-
-        let error = new Error(response.statusText)
-        error.response = response
-        throw error
-    }
-
-    parseJSON (response) {
-        return response.json()
+        fetch(this.url).then(checkStatus).then(parseJSON).then((res) => {
+            this.setState({ posts: res })
+        })
     }
 
     setActivePost (id) {
