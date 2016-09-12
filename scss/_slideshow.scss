@@ -1,0 +1,12 @@
+article .content {
+  overflow: scroll;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+
+  .slide {
+    float: left;
+    height: 100%;
+  }
+}

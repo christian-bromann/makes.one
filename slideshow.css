@@ -1,0 +1,9 @@
+/* line 1, scss/slideshow.scss */
+.slide {
+  overflow: scroll;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 5000px;
+  height: 100%;
+}

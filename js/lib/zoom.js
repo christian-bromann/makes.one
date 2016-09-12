@@ -1,7 +1,10 @@
 const STYLE = document.body.style
 
 export default class Zoom {
-    constructor () {
+    constructor (duration = 800) {
+        this.duration = duration // effect duration
+        this.durationInSec = parseFloat(duration / 1000)
+
         /**
          * The current zoom level (scale)
          */
@@ -32,11 +35,11 @@ export default class Zoom {
          * The easing that will be applied when we zoom in/out
          */
         if (this.supportsTransforms) {
-            STYLE.transition = 'transform 0.8s ease'
-            STYLE.OTransition = '-o-transform 0.8s ease'
-            STYLE.msTransition = '-ms-transform 0.8s ease'
-            STYLE.MozTransition = '-moz-transform 0.8s ease'
-            STYLE.WebkitTransition = '-webkit-transform 0.8s ease'
+            STYLE.transition = `transform ${this.durationInSec}s ease`
+            STYLE.OTransition = `-o-transform ${this.durationInSec}s ease`
+            STYLE.msTransition = `-ms-transform ${this.durationInSec}s ease`
+            STYLE.MozTransition = `-moz-transform ${this.durationInSec}s ease`
+            STYLE.WebkitTransition = `-webkit-transform ${this.durationInSec}s ease`
         }
 
         /**
@@ -117,6 +120,9 @@ export default class Zoom {
         }
 
         this.level = scale
+        return new Promise((r) => {
+            setTimeout(() => r(scale === 1), this.duration)
+        })
     }
 
     /**
@@ -194,20 +200,18 @@ export default class Zoom {
             options.x *= options.scale
             options.y *= options.scale
 
-            this._magnify(options, options.scale)
-
             if (options.pan !== false) {
                 // Wait with engaging panning as it may conflict with the
                 // zoom transition
                 this.panEngageTimeout = setTimeout(() => {
                     this.panUpdateInterval = setInterval(this._pan.bind(this), 1000 / 60)
-                }, 800)
+                }, this.duration)
             }
+
+            return this._magnify(options, options.scale)
         }
 
-        return new Promise((r) => {
-            this.resolve = r
-        })
+        return Promise.resolve()
     }
 
     /**
@@ -216,13 +220,8 @@ export default class Zoom {
     out () {
         clearTimeout(this.panEngageTimeout)
         clearInterval(this.panUpdateInterval)
-        this._magnify({ x: 0, y: 0 }, 1)
         this.level = 1
-
-        if (typeof this.resolve === 'function') {
-            this.resolve()
-            return Promise.resolve()
-        }
+        return this._magnify({ x: 0, y: 0 }, this.level)
     }
 
     get zoomLevel () {

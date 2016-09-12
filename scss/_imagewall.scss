@@ -15,13 +15,16 @@
       opacity: 1;
     }
 
+    .content {
+      display: none;
+    }
+    &.active .content {
+      display: block;
+    }
+
     img {
       width: 100%;
       display: block;
     }
-  }
-
-  .item.active + .item {
-    display: none;
   }
 }
