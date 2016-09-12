@@ -24,3 +24,38 @@ function loadNavigation() {
 
     return $nav_links;
 }
+
+function getFieldsForPost( $data ) {
+    global $cfs;
+    $fields = $cfs->get(false, $data['id'], array('format' => 'raw'));
+    $ret = array();
+
+
+    foreach ($fields['images'] as $id => $row) {
+        foreach ($row as $type => $content) {
+            if($content === '') {
+                continue;
+            }
+
+            if($type === 'image') {
+                $image = wp_get_attachment_metadata(intval($content), TRUE);
+                $image['type'] = $type;
+                array_push($ret, $image);
+            } else {
+                array_push($ret, (object) array(
+                    'type' => $type,
+                    'content' => $content
+                ));
+            }
+        }
+    }
+
+	return $ret;
+}
+
+add_action( 'rest_api_init', function () {
+	register_rest_route( 'makes/v1', '/fields/(?P<id>\d+)', array(
+		'methods' => 'GET',
+		'callback' => 'getFieldsForPost',
+	) );
+} );
