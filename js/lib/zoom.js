@@ -4,6 +4,7 @@ export default class Zoom {
     constructor (duration = 800) {
         this.duration = duration // effect duration
         this.durationInSec = parseFloat(duration / 1000)
+        this.article = null
 
         /**
          * The current zoom level (scale)
@@ -121,7 +122,15 @@ export default class Zoom {
 
         this.level = scale
         return new Promise((r) => {
-            setTimeout(() => r(scale === 1), this.duration)
+            const elems = document.querySelectorAll('article[class="item"]')
+            elems.forEach(e => e.style.display = 'block')
+
+            setTimeout(() => {
+                r(scale === 1)
+
+                const elems = document.querySelectorAll('article[class="item"]')
+                elems.forEach(e => e.style.display = 'none')
+            }, this.duration)
         })
     }
 
@@ -182,7 +191,7 @@ export default class Zoom {
         // If an element is set, that takes precedence
         if (Boolean(options.element)) {
             // Space around the zoomed in element to leave on screen
-            var padding = 20
+            var padding = 40
             var bounds = options.element.getBoundingClientRect()
 
             options.x = bounds.left - padding
@@ -206,6 +215,16 @@ export default class Zoom {
                 this.panEngageTimeout = setTimeout(() => {
                     this.panUpdateInterval = setInterval(this._pan.bind(this), 1000 / 60)
                 }, this.duration)
+            }
+
+            if (Boolean(options.element)) {
+                const parent = options.element.parentElement.parentElement
+                parent.style.width = bounds.width + 'px'
+                parent.style.height = bounds.height + 'px'
+
+                parent.parentElement.querySelectorAll('button').forEach(elem => {
+                    elem.style.transform = `scale(${1 / options.scale})`
+                })
             }
 
             return this._magnify(options, options.scale)

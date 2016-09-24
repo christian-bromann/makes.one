@@ -1,12 +1,39 @@
-article .content {
-  overflow: scroll;
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-
-  .slide {
-    float: left;
+article.item {
+  .content {
     height: 100%;
+    z-index: 1;
+
+    .slide {
+      display: none;
+      float: left;
+      height: 100%;
+      outline: none;
+
+      &.visible {
+        display: block;
+      }
+    }
+  }
+
+  button {
+    background: transparent;
+    border: 0;
+    position: absolute;
+    top: 50%;
+    display: none;
+    z-index: 2;
+    width: 39px;
+    outline: none;
+
+    svg {
+      width: 100%;
+    }
+
+    &.left {
+      left: -45px;
+    }
+    &.right {
+      right: -45px;
+    }
   }
 }

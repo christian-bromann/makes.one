@@ -13,7 +13,7 @@ const MASONRY_OPTIONS = {
     itemSelector: 'article.item'
 }
 
-class ImageWall extends React.Component {
+export default class ImageWall extends React.Component {
     get displayName () {
         return 'ImageWall'
     }
@@ -59,5 +59,3 @@ class ImageWall extends React.Component {
             </Masonry>)
     }
 }
-
-export default ImageWall

@@ -1,7 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
 
-class SplashScreen extends React.Component {
+export default class SplashScreen extends React.Component {
     get displayName () {
         return 'SplashScreen'
     }
@@ -17,8 +17,6 @@ class SplashScreen extends React.Component {
 
     render () {
         let classes = classnames({loaded: this.state.loaded, ready: this.state.ready})
-        return (<div className={classes} id="splashscreen"></div>)
+        return (<div className={classes} id={'splashscreen'}></div>)
     }
 }
-
-export default SplashScreen

@@ -2,10 +2,11 @@ import React from 'react'
 import classnames from 'classnames'
 import 'whatwg-fetch'
 
+import SVG from './svg.jsx'
 import Zoom from '../lib/zoom'
 import { checkStatus, parseJSON } from '../utils/request'
 
-class Slideshow extends React.Component {
+export default class Slideshow extends React.Component {
     get displayName () {
         return 'Slideshow'
     }
@@ -23,14 +24,22 @@ class Slideshow extends React.Component {
         super(props)
         this.zoom = new Zoom()
         this.url = `/wp-json/makes/v1/fields/${this.props.post.id}`
-        this.state = { posts: [] }
+        this.state = { posts: [], displayButtons: false }
     }
 
     toggleZoom (e) {
         this.props.setActivePost(!this.props.isActive ? this.props.post.id : null)
         this.zoom.to({ element: e.target }).then((hasZoomedOut) => {
+            if (!hasZoomedOut) {
+                this.setState({ displayButtons: !this.state.displayButtons })
+            }
+
             document.body.parentElement.style.overflow = hasZoomedOut ? 'auto' : 'hidden'
         })
+
+        if (this.state.displayButtons) {
+            this.setState({ displayButtons: !this.state.displayButtons })
+        }
 
         /**
          * fetch post data when user zooms in
@@ -43,8 +52,18 @@ class Slideshow extends React.Component {
         }
     }
 
+    prev (e) {
+        e.preventDefault()
+        console.log('prev', this.props.post.id)
+    }
+
+    next (e) {
+        e.preventDefault()
+        console.log('next', this.props.post.id)
+    }
+
     render () {
-        let classes = classnames(
+        const itemClasses = classnames(
             { visible: this.props.isVisible || this.props.isActive },
             { active: this.props.isActive },
             'item'
@@ -61,22 +80,29 @@ class Slideshow extends React.Component {
             }
 
             return (
-                <div className={`slide ${post.type}`} key={i}>
+                <a className={`slide ${post.type}`} href={`#!/${this.props.post.slug}`} key={i}>
                     {postContent}
-                </div>
+                </a>
             )
         })
 
         return (
-            <article className={classes} key={this.props.post.id} onClick={this.toggleZoom.bind(this)}>
-                <a href={`#!/${this.props.post.slug}`}>
-                    <img alt={this.props.post.title.rendered} src={this.props.post._embedded['wp:featuredmedia'][0].source_url} title={this.props.post.title.rendered}></img>
-                </a>
+            <article className={itemClasses} key={this.props.post.id} onClick={this.toggleZoom.bind(this)}>
+                <button className={'left'} onClick={this.prev.bind(this)}>
+                    <SVG name={'arrow_left'} />
+                </button>
 
-                <div className={'content'}>{childElements}</div>
+                <div className={'content'}>
+                    <a className={'slide image visible'} href={`#!/${this.props.post.slug}`}>
+                        <img alt={this.props.post.title.rendered} src={this.props.post._embedded['wp:featuredmedia'][0].source_url} title={this.props.post.title.rendered}></img>
+                    </a>
+                    {childElements}
+                </div>
+
+                <button className={'right'} onClick={this.prev.bind(this)}>
+                    <SVG name={'arrow_right'} />
+                </button>
             </article>
         )
     }
 }
-
-export default Slideshow

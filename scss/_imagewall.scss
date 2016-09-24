@@ -1,7 +1,5 @@
 .imageWall {
   display: block;
-  max-width: 1000px;
-  margin: 50px auto 0;
 
   .item {
     @include transition(1s opacity ease);
@@ -15,11 +13,14 @@
       opacity: 1;
     }
 
-    .content {
-      display: none;
-    }
-    &.active .content {
-      display: block;
+    &.active {
+      button {
+        display: block;
+      }
+
+      .content {
+        display: block;
+      }
     }
 
     img {
