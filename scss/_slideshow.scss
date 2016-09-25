@@ -7,14 +7,36 @@ article.item {
       display: none;
       float: left;
       height: 100%;
+      width: 100%;
       outline: none;
 
       &.visible {
         display: block;
+
+        &.slideLeft {
+          animation-name: slideLeftOut;
+        }
+        &.slideRight {
+          animation-name: slideRightOut;
+        }
+      }
+
+      &.slideLeft,
+      &.slideRight {
+        display: block;
+        position: absolute;
+        animation-duration: .5s;
+      }
+
+      &.slideLeft {
+        animation-name: slideLeftIn;
+      }
+
+      &.slideRight {
+        animation-name: slideRightIn;
       }
     }
   }
-
   button {
     background: transparent;
     border: 0;
@@ -35,5 +57,42 @@ article.item {
     &.right {
       right: -45px;
     }
+  }
+}
+
+@keyframes slideLeftOut {
+  from {
+    @include transform(translate(0))
+  }
+
+  to {
+    @include transform(translate(-120%))
+  }
+}
+@keyframes slideLeftIn {
+  from {
+    @include transform(translate(120%))
+  }
+
+  to {
+    @include transform(translate(0%))
+  }
+}
+@keyframes slideRightOut {
+  from {
+    @include transform(translate(0))
+  }
+
+  to {
+    @include transform(translate(120%))
+  }
+}
+@keyframes slideRightIn {
+  from {
+    @include transform(translate(-120%))
+  }
+
+  to {
+    @include transform(translate(0%))
   }
 }
