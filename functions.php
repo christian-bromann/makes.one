@@ -30,6 +30,9 @@ function getFieldsForPost( $data ) {
     $fields = $cfs->get(false, $data['id'], array('format' => 'raw'));
     $ret = array();
 
+    if (empty($fields['images'])) {
+        return new WP_Error('no_images', 'No images found', array( 'status' => 404 ));
+    }
 
     foreach ($fields['images'] as $id => $row) {
         foreach ($row as $type => $content) {

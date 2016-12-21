@@ -87,6 +87,13 @@ export default class Slideshow extends React.Component {
         }, SLIDE_ANIM_TIMEOUT)
     }
 
+    getFeaturedImage (post) {
+        if (!post._embedded['wp:featuredmedia']) {
+            return '#'
+        }
+        return post._embedded['wp:featuredmedia'][0].source_url.slice(8)
+    }
+
     render () {
         const itemClasses = classnames(
             { visible: this.props.isVisible || this.props.isActive },
@@ -96,7 +103,7 @@ export default class Slideshow extends React.Component {
 
         const posts = this.state.posts.slice()
         posts.unshift({
-            file: this.props.post._embedded['wp:featuredmedia'][0].source_url.slice(8),
+            file: this.getFeaturedImage(this.props.post),
             image_meta: { title: this.props.post.title.rendered },
             type: 'image'
         })
